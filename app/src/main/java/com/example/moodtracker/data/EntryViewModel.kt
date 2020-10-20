@@ -6,7 +6,13 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class EntryViewMode(application: Application): AndroidViewModel(application) {
+/**
+ * The way to actually access the database. Creating an EntryViewModel object allows calling these
+ * methods below.
+ *
+ * Syntax for instantiation:  mEntryViewModel = ViewModelProvider(this).get(EntryViewModel::class.java) [this is context, could be different]
+ */
+class EntryViewModel(application: Application): AndroidViewModel(application) {
     // TODO Setters. Add method names in init{}
     private val repository: EntryRepository
     init {

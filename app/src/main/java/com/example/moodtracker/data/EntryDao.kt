@@ -6,6 +6,10 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
+/**
+ * Data Access Object for Entry. This is queries, insert, delete, update, etc. are written.
+ * Suspend is used to call the database function as a coroutine.
+ */
 @Dao
 interface EntryDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)

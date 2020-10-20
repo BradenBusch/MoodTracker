@@ -7,6 +7,12 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+/**
+ * The way to actually access the database. Creating an UserViewModel object allows calling these
+ * methods below.
+ *
+ * Syntax for instantiation:  mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java) [this is context, could be different]
+ */
 class UserViewModel(application: Application): AndroidViewModel(application) {
     val getAllUsers: LiveData<List<User>>
     private val repository: UserRepository
@@ -17,6 +23,10 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
     }
 
     // TODO add coroutines
+    /*
+     * The following methods are coroutines that actually call the queries that were written in the DAO,
+     * through accessing the repository.
+     */
     fun addUser(user: User) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addUser(user)

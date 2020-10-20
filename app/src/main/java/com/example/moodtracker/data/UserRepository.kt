@@ -3,7 +3,7 @@ package com.example.moodtracker.data
 import androidx.lifecycle.LiveData
 
 /**
- * This class abstracts access to multiple data sources
+ * User repository. This class abstracts access to multiple data sources, and calls the DAOs methods
  */
 class UserRepository(private val userDao: UserDao) {
 
