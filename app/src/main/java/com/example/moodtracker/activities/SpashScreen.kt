@@ -7,8 +7,12 @@ import android.os.Handler
 import com.example.moodtracker.MainActivity
 import com.example.moodtracker.R
 
+/**
+ * Splash screen, this essentially only handles delaying the app loading.
+ * Sets the activity and calls a handler method.
+ */
 class SpashScreen : AppCompatActivity() {
-    private val SPLASH_TIME: Long = 3000 // This is one second
+    private val splashTime: Long = 3000 // This is one second
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,6 +21,6 @@ class SpashScreen : AppCompatActivity() {
         Handler().postDelayed({
             startActivity(Intent(this, MainActivity::class.java))
             finish()
-        }, SPLASH_TIME)
+        }, splashTime)
     }
 }

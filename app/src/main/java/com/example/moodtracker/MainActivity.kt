@@ -8,10 +8,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.moodtracker.data.User
 import com.example.moodtracker.data.UserViewModel
 
-/* TODO
- * I think that UserViewModel and EntryViewModel will handle opening the database..
+/* TODO All that main activity should do is instantiate the fragment and navigation components of the app
  */
 
+/**
+ */
 class MainActivity : AppCompatActivity() {
     private lateinit var mUserViewModel: UserViewModel
 
