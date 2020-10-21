@@ -9,6 +9,7 @@ import com.example.moodtracker.data.User
 import com.example.moodtracker.data.UserViewModel
 
 /* TODO All that main activity should do is instantiate the fragment and navigation components of the app
+ *  we should consider making a logo and using that instead of a textview
  */
 
 /**

@@ -19,4 +19,6 @@ interface UserDao {
     @Query("SELECT * FROM user_table ORDER BY userName ASC")
     fun getAllUsers(): LiveData<List<User>>
 
+    @Query("SELECT COUNT(userName) FROM user_table WHERE userName =:username")
+    fun userExists(username: String) : LiveData<Int>
 }

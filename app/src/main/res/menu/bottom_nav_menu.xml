@@ -1,28 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!-- TODO this needs to be reworked. Only works with 3 for some reason -->
+    <!-- <item
+        android:id="@+id/action_dashboard"
+        android:enabled="true"
+        android:icon="@drawable/ic_action_dashboard"
+        android:title="Dashboard"
+        /> -->
     <item
         android:id="@+id/action_calendar"
         android:enabled="true"
         android:icon="@drawable/ic_action_calendar"
-        app:showAsAction="ifRoom"
-        android:title="" />
+        android:title="Calendar" />
     <item
         android:id="@+id/action_newEntry"
         android:enabled="true"
         android:icon="@drawable/ic_action_add"
-        app:showAsAction="ifRoom"
-        android:title=""/>
+        android:title="New Entry" />
     <item
         android:id="@+id/action_entries"
         android:enabled="true"
         android:icon="@drawable/ic_action_entries"
-        app:showAsAction="ifRoom"
-        android:title="" />
-    <item
+        android:title="Entries" />
+    <!--<item
         android:id="@+id/action_settings"
         android:enabled="true"
         android:icon="@drawable/ic_action_settings"
-        app:showAsAction="ifRoom"
-        android:title="" />
+        android:title=""
+         /> -->
 </menu>

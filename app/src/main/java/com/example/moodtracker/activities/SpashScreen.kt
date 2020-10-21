@@ -1,6 +1,8 @@
 package com.example.moodtracker.activities
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -19,7 +21,20 @@ class SpashScreen : AppCompatActivity() {
         setContentView(R.layout.activity_spash_screen)
 
         Handler().postDelayed({
-            startActivity(Intent(this, MainActivity::class.java))
+            // TODO start either login or signup page here if no account
+            //  this will need to be finished in Login and Signup
+            val preferences: SharedPreferences = getSharedPreferences("SignedIn", Context.MODE_PRIVATE)
+            // val editor: SharedPreferences.Editor = preferences.edit()
+            // editor.putString("FirstTime","false");
+            // editor.commit();
+            val status: String? = preferences.getString("SignedIn", "0")
+            if (status.equals("false")) {
+                // TODO: GO TO LOGIN
+            }
+            else {
+                startActivity(Intent(this, Signup::class.java))
+            }
+            //startActivity(Intent(this, MainActivity::class.java))
             finish()
         }, splashTime)
     }
