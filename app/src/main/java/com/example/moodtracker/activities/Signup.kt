@@ -1,5 +1,8 @@
 package com.example.moodtracker.activities
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -9,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.moodtracker.MainActivity
 import com.example.moodtracker.R
 import com.example.moodtracker.data.User
 import com.example.moodtracker.data.UserViewModel
@@ -39,7 +43,8 @@ class Signup : AppCompatActivity() {
     }
 
     /*
-     * Verify the Username, PIN, and Confirm PIN fields.
+     * Verify the Username, PIN, and Confirm PIN fields. This method will also create the User if all
+     * fields are verified propery.
      */
     fun verfiyFields() {
         var username: String = usernameEditText.text.toString()
@@ -63,23 +68,32 @@ class Signup : AppCompatActivity() {
         if (!isPinNum || !isConfPinNum || pin.length != 4 || pinConf.length != 4) {
             pinEditText.error = "Make sure to use a 4 digit number as your pin."
             confPinEditText.error = "Make sure to use a 4 digit number as your pin."
-            return // TODO remove
+            return
         }
         // Pins are all integers. Check if they equal each other.
         if (Integer.valueOf(pin) != Integer.valueOf(pinConf)) {
             confPinEditText.error = "Make sure your pins match"
-            return // TODO remove
+            return
         }
         // Pins match, now query the database to see if this username and pin is taken
         val mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
-        mUserViewModel.userExists(username).observe(this, Observer {user ->
-            Log.i("Beep", user.toString())
+        mUserViewModel.userExists(username).observe(this, Observer {count ->
+            Log.d("BEEP", count.toString())
+            // "count" is the return of userExists, which is a query to check if there is already a user with this name
+            // This username is taken
+            if (count == 1) {
+                usernameEditText.error = "Sorry, but this username is already taken. Try another."
+            }
+            // Username is open, add this to the database and move on to MainActivity
+            else {
+                val user = User(username, Integer.valueOf(pin))
+                mUserViewModel.addUser(user)
+                val editor: SharedPreferences.Editor = getSharedPreferences("SignedIn", Context.MODE_PRIVATE).edit()
+                editor.putString("SignedIn", "true")
+                editor.apply()
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }
         })
-       // Log.i("BEEP", "Count of Username")
-        // Insert the user
-        val user = User(username, Integer.valueOf(pin))
-        mUserViewModel.addUser(user)
-        
     }
-
 }

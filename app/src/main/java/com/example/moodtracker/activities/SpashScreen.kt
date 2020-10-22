@@ -21,20 +21,14 @@ class SpashScreen : AppCompatActivity() {
         setContentView(R.layout.activity_spash_screen)
 
         Handler().postDelayed({
-            // TODO start either login or signup page here if no account
-            //  this will need to be finished in Login and Signup
             val preferences: SharedPreferences = getSharedPreferences("SignedIn", Context.MODE_PRIVATE)
-            // val editor: SharedPreferences.Editor = preferences.edit()
-            // editor.putString("FirstTime","false");
-            // editor.commit();
             val status: String? = preferences.getString("SignedIn", "0")
-            if (status.equals("false")) {
-                // TODO: GO TO LOGIN
+            if (status.equals("true")) {
+                startActivity(Intent(this, Login::class.java))
             }
             else {
                 startActivity(Intent(this, Signup::class.java))
             }
-            //startActivity(Intent(this, MainActivity::class.java))
             finish()
         }, splashTime)
     }

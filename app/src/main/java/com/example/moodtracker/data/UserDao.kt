@@ -21,4 +21,7 @@ interface UserDao {
 
     @Query("SELECT COUNT(userName) FROM user_table WHERE userName =:username")
     fun userExists(username: String) : LiveData<Int>
+
+    @Query("SELECT * FROM user_table WHErE userName=:username")
+    fun getUser(username: String): LiveData<User> // TODO finish writing this in DAO, etc
 }
