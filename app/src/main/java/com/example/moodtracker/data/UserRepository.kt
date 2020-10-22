@@ -16,4 +16,8 @@ class UserRepository(private val userDao: UserDao) {
     fun userExists(username: String): LiveData<Int> {
         return userDao.userExists(username)
     }
+
+    fun getUser(username: String): LiveData<User> {
+        return userDao.getUser(username)
+    }
 }

@@ -37,6 +37,10 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
         return repository.userExists(username)
     }
 
+    fun getUser(username: String): LiveData<User>{
+        return repository.getUser(username)
+    }
+
     fun getUsers() {
         viewModelScope.launch(Dispatchers.IO){
             repository.getAllUsers
