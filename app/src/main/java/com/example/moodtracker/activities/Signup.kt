@@ -91,7 +91,10 @@ class Signup : AppCompatActivity() {
                 val editor: SharedPreferences.Editor = getSharedPreferences("SignedIn", Context.MODE_PRIVATE).edit()
                 editor.putString("SignedIn", "true")
                 editor.apply()
-                startActivity(Intent(this, MainActivity::class.java))
+                var intent = Intent(this, MainActivity::class.java)
+                // Pass the user name to MainActivity
+                intent.putExtra("LoggedInUser", username)
+                startActivity(intent)
                 finish()
             }
         })

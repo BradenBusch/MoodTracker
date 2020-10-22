@@ -8,6 +8,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.moodtracker.data.User
 import com.example.moodtracker.data.UserViewModel
+import com.example.moodtracker.fragments.Calendar
+import com.example.moodtracker.fragments.Entries
 import com.example.moodtracker.fragments.NewEntry
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -16,6 +18,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
  */
 
 /**
+ * MainActivity controls how the three primary fragments interact with each other.
+ * This class instantiates the bottom nav bar, setting its on click listeners (which fragment to open)
+ * This class also will get the currently logged in user, and pass around as needed
  */
 class MainActivity : AppCompatActivity() {
     private lateinit var mUserViewModel: UserViewModel
@@ -24,6 +29,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Print the current database
+        printDatabaseUserNames()
+
+        // Get the intent, which is the username of the current user
+        val currUserName = intent.getStringExtra("LoggedInUser")
+
+        // Get the database values of that user
+
+        // Apply on clicks for the bottom nav bar
+        val bottomNavBar: BottomNavigationView = findViewById(R.id.mainactivity_bottomnav_navbar)
+        bottomNavBar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        bottomNavBar.selectedItemId = R.id.action_newEntry
+    }
+
+    private fun printDatabaseUserNames() {
         mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         //insertUserToDatabase("CazualGingerr", 4486)
         //insertUserToDatabase("GNELSON", 2222)
@@ -32,9 +52,6 @@ class MainActivity : AppCompatActivity() {
         mUserViewModel.getAllUsers.observe(this, Observer {
                 list -> list.forEach{Log.d("BEEP", it.userName)}
         })
-
-        val bottomNavBar: BottomNavigationView = findViewById(R.id.mainactivity_bottomnav_navbar)
-        bottomNavBar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
 
     private fun insertUserToDatabase(user_name: String, pin: Int) {
@@ -43,11 +60,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     /*
-     * Listener for each fragment. This allows switching between the three
+     * Listener for each fragment. This allows switching between the three.
      */
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.action_calendar -> {
+                val fragment = Calendar.newInstance()
+                openFragment(fragment)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.action_newEntry -> {
@@ -56,10 +75,12 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.action_entries -> {
+                val fragment = Entries.newInstance()
+                openFragment(fragment)
                 return@OnNavigationItemSelectedListener true
             }
         }
-        false
+        false // idk what this false is for, i think its like default in a switch
     }
 
     /*
