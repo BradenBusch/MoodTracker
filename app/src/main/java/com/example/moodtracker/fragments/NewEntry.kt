@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.moodtracker.R
 
+/**
+ * This class handles the "New Entry" tab. It will allow a user to make a new entry which is stored in the database.
+ */
 class NewEntry : Fragment() {
 
     override fun onCreateView(

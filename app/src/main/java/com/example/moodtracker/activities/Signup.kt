@@ -77,22 +77,23 @@ class Signup : AppCompatActivity() {
         }
         // Pins match, now query the database to see if this username and pin is taken
         val mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+        // "count" is the return of userExists, which is a query to check if there is already a user with this name
         mUserViewModel.userExists(username).observe(this, Observer {count ->
             Log.d("BEEP", count.toString())
-            // "count" is the return of userExists, which is a query to check if there is already a user with this name
             // This username is taken
             if (count == 1) {
                 usernameEditText.error = "Sorry, but this username is already taken. Try another."
             }
             // Username is open, add this to the database and move on to MainActivity
             else {
+                // Add the user to the database
                 val user = User(username, Integer.valueOf(pin))
                 mUserViewModel.addUser(user)
+                // Put "SignedIn" in SharedPreferences. This will allow the SignIn screen to be skipped in favor of Login
                 val editor: SharedPreferences.Editor = getSharedPreferences("SignedIn", Context.MODE_PRIVATE).edit()
                 editor.putString("SignedIn", "true")
                 editor.apply()
                 var intent = Intent(this, MainActivity::class.java)
-                // Pass the user name to MainActivity
                 intent.putExtra("LoggedInUser", username)
                 startActivity(intent)
                 finish()

@@ -54,11 +54,6 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun insertUserToDatabase(user_name: String, pin: Int) {
-        val user = User(user_name, pin)
-        mUserViewModel.addUser(user)
-    }
-
     /*
      * Listener for each fragment. This allows switching between the three.
      */
