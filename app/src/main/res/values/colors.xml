@@ -5,7 +5,14 @@
     <color name="colorAccent">#03DAC5</color>
     <!--<color name="babyBlue">#89CFF0</color> -->
     <color name="black">#000000</color>
-    <color name="babyBlue">#03A9F4</color>
+    <color name="babyBlue">#85DAFF</color>
     <color name="slateBlack">#4A4B4B</color>
     <color name="orangeRed">#f45303</color>
+    <color name="tangerine">#f49003</color>
+    <color name="candyPink">#09D2DE</color>
+    <color name="great">#B300BD</color>
+    <color name="good">#5179FF</color>
+    <color name="average">#DEED3B</color>
+    <color name="bad">#D98729</color>
+    <color name="terrible">#D91A1A</color>
 </resources>

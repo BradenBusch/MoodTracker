@@ -1,6 +1,8 @@
 package com.example.moodtracker.activities
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -15,20 +17,19 @@ import com.example.moodtracker.data.User
 import com.example.moodtracker.data.UserViewModel
 
 /**
- * This class handles the login screen. It will pass the current user in an Intent to the MainActivity.
+ * This class handles the login screen.
  * It verifies the credentials of Login and PIN. We can also implement a "Stay Logged In" feature
+ *
  */
 class Login : AppCompatActivity() {
 
     // Hooks
-    private lateinit var usernameEditText: EditText
     private lateinit var pinEditText: EditText
     private lateinit var loginBtn: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        usernameEditText = findViewById(R.id.login_et_username)
         pinEditText = findViewById(R.id.login_et_pin)
         loginBtn = findViewById(R.id.login_btn_login)
         loginBtn.setOnClickListener { verifyFields() }
@@ -39,20 +40,25 @@ class Login : AppCompatActivity() {
      * if they do, log them in.
      */
     private fun verifyFields() {
-        var username: String = usernameEditText.text.toString()
         var pin: String = pinEditText.text.toString()
-
-        // Check if username or pin is empty
-        if (TextUtils.isEmpty(username)) {
-            usernameEditText.error = "Please make a username."
-            return
-        }
         if (TextUtils.isEmpty(pin)) {
             pinEditText.error = "Make sure you enter a pin!"
             return
         }
-        // TODO Remove logs
+        // User entered a PIN
+        val preferences: SharedPreferences = getSharedPreferences("PIN", Context.MODE_PRIVATE)
+        val userPin: String? = preferences.getString("PIN", "0")
+        if (userPin.equals(pin)) {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+        else {
+            pinEditText.error = "Your pin is incorrect. Try another."
+        }
+    }
+}
         // Not empty, check if the username exists
+        /*
         var userExists = 0
         Log.d("BEEP", "Username $username    User Exists: $userExists")
         val mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
@@ -81,7 +87,4 @@ class Login : AppCompatActivity() {
                     }
                 })
             }
-        })
-    }
-
-}
+        })*/

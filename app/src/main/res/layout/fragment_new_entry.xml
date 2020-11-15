@@ -1,13 +1,151 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/babyBlue"
     tools:context="com.example.moodtracker.fragments.NewEntry">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/newEntry_tv_helloheader">
+
+            <ImageButton
+                android:id="@+id/newEntry_imgbtn_cool"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:background="@color/babyBlue"
+                android:src="@drawable/ic_great" />
+
+            <ImageButton
+                android:id="@+id/newEntry_imgbtn_happy"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:background="@color/babyBlue"
+                android:src="@drawable/ic_smile"
+                android:layout_marginRight="2dp"/>
+
+            <ImageButton
+                android:id="@+id/newEntry_imgbtn_average"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginRight="2dp"
+                android:background="@color/babyBlue"
+                android:src="@drawable/ic_average" />
+
+            <ImageButton
+                android:id="@+id/newEntry_imgbtn_bad"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:background="@color/babyBlue"
+                android:src="@drawable/ic_bad"
+                android:layout_marginRight="2dp"/>
+
+            <ImageButton
+                android:id="@+id/newEntry_imgbtn_terrible"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:background="@color/babyBlue"
+                android:src="@drawable/ic_terrible"
+                android:layout_marginRight="2dp"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/newEntry_tv_helloheader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:text="Hi, "
+            android:textColor="@color/slateBlack"
+            android:textSize="36sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/newEntry_tv_calendardate" />
+
+        <TextView
+            android:id="@+id/newEntry_tv_calendardate"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:text="How was your day?"
+            android:textColor="@color/slateBlack"
+            android:textSize="36sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/newEntry_tv_helloheader" />
+
+        <Button
+            android:id="@+id/newEntry_btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="72dp"
+            android:background="@drawable/ghost_button_white"
+            android:text="Save"
+            android:textAllCaps="false"
+            android:textColor="@color/ghost_button_white_fonts"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="24dp"
+            android:isScrollContainer="false"
+            android:padding="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/newEntry_btn_save"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+            <EditText
+                android:id="@+id/newEntry_et_journal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/login_signup_edittext"
+                android:ems="10"
+                android:hint="Add an optional journal entry for the day"
+                android:inputType="textMultiLine"
+                android:padding="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/parent" />
+        </ScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

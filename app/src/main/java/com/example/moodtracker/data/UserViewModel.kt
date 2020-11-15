@@ -37,7 +37,7 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
         return repository.userExists(username)
     }
 
-    fun getUser(username: String): LiveData<User>{
+    fun getUser(username: String): LiveData<User> {
         return repository.getUser(username)
     }
 

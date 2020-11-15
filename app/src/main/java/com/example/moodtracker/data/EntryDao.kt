@@ -15,6 +15,9 @@ interface EntryDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addEntry(entry: Entry)
 
-    @Query("SELECT * FROM entry_table WHERE userName=:userName")
-    fun getAllUserEntries(userName: String): LiveData<List<Entry>>
+    @Query("SELECT * FROM entry_table")
+    fun getAllEntries(): LiveData<List<Entry>>
+
+    @Query("SELECT * FROM entry_table WHERE date=:date")
+    fun getEntryOnDate(date: String): List<Entry>
 }

@@ -8,25 +8,11 @@
     tools:context="com.example.moodtracker.activities.Login">
 
     <EditText
-        android:id="@+id/login_et_username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="24dp"
-        android:padding="10dp"
-        android:background="@drawable/login_signup_edittext"
-        android:hint="Username"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
         android:id="@+id/login_et_pin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/login_signup_edittext"
         android:hint="PIN"
@@ -34,7 +20,7 @@
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_et_username" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/login_btn_login"

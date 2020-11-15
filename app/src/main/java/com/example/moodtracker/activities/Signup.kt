@@ -22,10 +22,8 @@ import com.example.moodtracker.data.UserViewModel
  * to show the Login screen instead. If the user clicks Log-Out from the app, this screen will be
  * shown again.
  *
- * This class also handles database insert of a new User
  */
 class Signup : AppCompatActivity() {
-
     // Hooks
     private lateinit var usernameEditText: EditText
     private lateinit var pinEditText: EditText
@@ -46,7 +44,7 @@ class Signup : AppCompatActivity() {
      * Verify the Username, PIN, and Confirm PIN fields. This method will also create the User if all
      * fields are verified propery.
      */
-    fun verfiyFields() {
+    private fun verfiyFields() {
         var username: String = usernameEditText.text.toString()
         var pin: String = pinEditText.text.toString()
         var pinConf: String = confPinEditText.text.toString()
@@ -75,6 +73,20 @@ class Signup : AppCompatActivity() {
             confPinEditText.error = "Make sure your pins match"
             return
         }
+        // Pins match, make SharedPreferences for PIN, SignedIn, and UserName
+        var editor: SharedPreferences.Editor = getSharedPreferences("Username", Context.MODE_PRIVATE).edit()
+        editor.putString("UserName", username)
+        editor.apply()
+        editor = getSharedPreferences("PIN", Context.MODE_PRIVATE).edit()
+        editor.putString("PIN", pin)
+        editor.apply()
+        editor = getSharedPreferences("SignedIn", Context.MODE_PRIVATE).edit()
+        editor.putString("SignedIn", "true")
+        editor.apply()
+        startActivity(Intent(this, MainActivity::class.java))
+    }
+}
+        /*
         // Pins match, now query the database to see if this username and pin is taken
         val mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         // "count" is the return of userExists, which is a query to check if there is already a user with this name
@@ -99,5 +111,5 @@ class Signup : AppCompatActivity() {
                 finish()
             }
         })
-    }
-}
+        */
+

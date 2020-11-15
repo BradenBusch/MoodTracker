@@ -30,7 +30,7 @@ abstract class DB: RoomDatabase() {
                     context.applicationContext,
                     DB::class.java,
                     "_database"
-                ).build()
+                ).allowMainThreadQueries().build()
                 INSTANCE = instance
                 return instance
             }

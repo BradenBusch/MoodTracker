@@ -1,13 +1,24 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.moodtracker.fragments.Entries">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Entries" />
+        android:orientation="vertical">
+
+        <ExpandableListView
+            android:id="@+id/entries_expandableListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layoutDirection="rtl"
+            android:dividerHeight="1dp">
+            <!--android:divider="@null">-->
+        </ExpandableListView>
+    </LinearLayout>
 
 </FrameLayout>

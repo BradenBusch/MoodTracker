@@ -29,6 +29,7 @@ class SpashScreen : AppCompatActivity() {
             else {
                 startActivity(Intent(this, Signup::class.java))
             }
+            // startActivity(Intent(this, MainActivity::class.java))
             finish()
         }, splashTime)
     }

@@ -1,7 +1,10 @@
 package com.example.moodtracker
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.SharedMemory
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -32,15 +35,25 @@ class MainActivity : AppCompatActivity() {
         // Print the current database
         printDatabaseUserNames()
 
-        // Get the intent, which is the username of the current user
-        val currUserName = intent.getStringExtra("LoggedInUser")
-
-        // Get the database values of that user
+        // Get the username for use in a UI if needed
+        val preferences: SharedPreferences = getSharedPreferences("UserName", Context.MODE_PRIVATE)
+        val username: String? = preferences.getString("UserName", "0")
 
         // Apply on clicks for the bottom nav bar
         val bottomNavBar: BottomNavigationView = findViewById(R.id.mainactivity_bottomnav_navbar)
         bottomNavBar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         bottomNavBar.selectedItemId = R.id.action_newEntry
+
+        // Show the user a dialog box the first time (this can be disabled)
+        val spCheck: SharedPreferences = getSharedPreferences("ShowDialog", Context.MODE_PRIVATE)
+        val bool = spCheck.getBoolean("ShowDialog", false)
+        // Only show the alert dialog if the user hasn't clicked "dont show again"
+        if (bool) {
+            val editor: SharedPreferences.Editor = getSharedPreferences("ShowDialog", Context.MODE_PRIVATE).edit()
+            editor.putBoolean("ShowDialog", true)
+            editor.apply()
+        }
+
     }
 
     private fun printDatabaseUserNames() {
