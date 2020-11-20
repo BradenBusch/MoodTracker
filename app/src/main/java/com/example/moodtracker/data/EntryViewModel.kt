@@ -15,12 +15,14 @@ import kotlinx.coroutines.launch
  */
 class EntryViewModel(application: Application): AndroidViewModel(application) {
 
-    val getAllEntries: LiveData<List<Entry>>
+    val getAllEntriesLD: LiveData<List<Entry>>
+    val getAllEntries: List<Entry>
     private val repository: EntryRepository
     init {
         val entryDao = DB.getDatabase(application).entryDao()
         repository = EntryRepository(entryDao)
         getAllEntries = repository.getAllEntries
+        getAllEntriesLD = repository.getAllEntriesLD
     }
 
 

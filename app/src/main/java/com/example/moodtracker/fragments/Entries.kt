@@ -45,12 +45,11 @@ class Entries : Fragment() {
             Log.d("BEEP", listData.toString())
             adapter = EntryListAdapter(rootView.context)
             expandableListView!!.setAdapter(adapter)
-            expandableListView!!.setOnGroupExpandListener { groupPosition -> Toast.makeText(rootView.context, (titleList as ArrayList<String>)[groupPosition] + " List Expanded.", Toast.LENGTH_SHORT).show() }
+            expandableListView!!.setOnGroupExpandListener { }
 
-            expandableListView!!.setOnGroupCollapseListener { groupPosition -> Toast.makeText(rootView.context, (titleList as ArrayList<String>)[groupPosition] + " List Collapsed.", Toast.LENGTH_SHORT).show() }
+            expandableListView!!.setOnGroupCollapseListener { }
 
             expandableListView!!.setOnChildClickListener { parent, v, groupPosition, childPosition, id ->
-                Toast.makeText(rootView.context, "Clicked: " + (titleList as ArrayList<String>)[groupPosition] + " -> " + listData[(titleList as ArrayList<String>)[groupPosition]]!!.get(childPosition), Toast.LENGTH_SHORT).show()
                 false
             }
 
@@ -65,7 +64,8 @@ class Entries : Fragment() {
 
     private fun getData(): HashMap<String, List<String>> {
         val data = HashMap<String, List<String>>()
-        mEntryViewModel.getAllEntries.observe(viewLifecycleOwner, Observer { list->
+
+        mEntryViewModel.getAllEntriesLD.observe(viewLifecycleOwner, Observer { list->
             list.forEach { entry->
                 // Journal is an array list, but it will always be one entry
                 val journal = ArrayList<String>()

@@ -8,7 +8,8 @@ import androidx.lifecycle.LiveData
 
 class EntryRepository(private val entryDao: EntryDao) {
 
-    val getAllEntries: LiveData<List<Entry>> = entryDao.getAllEntries()
+    val getAllEntries: List<Entry> = entryDao.getAllEntries()
+    val getAllEntriesLD: LiveData<List<Entry>> = entryDao.getAllEntriesLD()
 
     suspend fun addEntry(entry: Entry) {
         entryDao.addEntry(entry)

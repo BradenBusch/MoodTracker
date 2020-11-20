@@ -62,6 +62,7 @@ class NewEntry : Fragment() {
         journalEditText = rootView.findViewById(R.id.newEntry_et_journal)
         saveButton = rootView.findViewById(R.id.newEntry_btn_save)
 
+        mEntryViewModel = ViewModelProvider(this).get(EntryViewModel::class.java)
         // Get current date
         val date = LocalDateTime.now()
         val format = DateTimeFormatter.ofPattern("MM/dd/yyyy. hh:mm a")
@@ -80,7 +81,7 @@ class NewEntry : Fragment() {
 
         // Set the clicks of the buttons
         setButtonClicks(rootView, setDate)
-        printAllEntries()
+        //printAllEntries()
         return rootView
     }
 
@@ -91,12 +92,12 @@ class NewEntry : Fragment() {
     /*
      * Helper method to print all the entries in the data base
      */
-    private fun printAllEntries() {
-        mEntryViewModel = ViewModelProvider(this).get(EntryViewModel::class.java)
-        mEntryViewModel.getAllEntries.observe(viewLifecycleOwner, Observer {
-            list -> list.forEach{Log.d("BEEP", "EntryID: ${it.entryId} Mood: ${it.mood} Date: ${it.date} Journal: ${it.journal}")}
-        })
-    }
+//    private fun printAllEntries() {
+//        mEntryViewModel = ViewModelProvider(this).get(EntryViewModel::class.java)
+//        mEntryViewModel.getAllEntries.observe(viewLifecycleOwner, Observer {
+//            list -> list.forEach{Log.d("BEEP", "EntryID: ${it.entryId} Mood: ${it.mood} Date: ${it.date} Journal: ${it.journal}")}
+//        })
+//    }
 
     private fun resetButtonClicks() {
         for (button in buttonList) {
@@ -211,9 +212,9 @@ class NewEntry : Fragment() {
     private fun saveEntry(mood: Int, date: String, journal: String) {
         Log.d("ClickedEmotion", clickedEmotion.toString())
         Log.d("Date", date)
-       // val mDate = date.split(".")[0]
-       // Log.d("Date", mDate)
-        val entry = Entry(mood, journal, date)
+        val mDate = date.split(".")[0]
+        Log.d("Date", mDate)
+        val entry = Entry(mood, journal, mDate)
         val mEntryViewModel = ViewModelProvider(this).get(EntryViewModel::class.java)
         mEntryViewModel.addEntry(entry)
         journalEditText.text.clear()

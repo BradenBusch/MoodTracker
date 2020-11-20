@@ -16,8 +16,12 @@ interface EntryDao {
     suspend fun addEntry(entry: Entry)
 
     @Query("SELECT * FROM entry_table")
-    fun getAllEntries(): LiveData<List<Entry>>
+    fun getAllEntries(): List<Entry>
+
+    @Query("SELECT * FROM entry_table")
+    fun getAllEntriesLD(): LiveData<List<Entry>>
 
     @Query("SELECT * FROM entry_table WHERE date=:date")
     fun getEntryOnDate(date: String): List<Entry>
+
 }
