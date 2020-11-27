@@ -9,10 +9,9 @@ import androidx.room.RoomDatabase
  * This class holds the actually Database object. It has already created an object and will continue
  * to re-use that same object instead of re-instantiating the database.
  */
-@Database(entities = [User::class, Entry::class], version = 1)
+@Database(entities = [Entry::class], version = 1)
 abstract class DB: RoomDatabase() {
     // Daos
-    abstract fun userDao(): UserDao
     abstract fun entryDao(): EntryDao
 
     companion object {

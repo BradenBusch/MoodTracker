@@ -5,17 +5,11 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.example.moodtracker.MainActivity
 import com.example.moodtracker.R
-import com.example.moodtracker.data.User
-import com.example.moodtracker.data.UserViewModel
 
 /**
  * This class handles the sign-up screen. It should write to SharedPreferences an account is created
@@ -86,30 +80,3 @@ class Signup : AppCompatActivity() {
         startActivity(Intent(this, MainActivity::class.java))
     }
 }
-        /*
-        // Pins match, now query the database to see if this username and pin is taken
-        val mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
-        // "count" is the return of userExists, which is a query to check if there is already a user with this name
-        mUserViewModel.userExists(username).observe(this, Observer {count ->
-            Log.d("BEEP", count.toString())
-            // This username is taken
-            if (count == 1) {
-                usernameEditText.error = "Sorry, but this username is already taken. Try another."
-            }
-            // Username is open, add this to the database and move on to MainActivity
-            else {
-                // Add the user to the database
-                val user = User(username, Integer.valueOf(pin))
-                mUserViewModel.addUser(user)
-                // Put "SignedIn" in SharedPreferences. This will allow the SignIn screen to be skipped in favor of Login
-                val editor: SharedPreferences.Editor = getSharedPreferences("SignedIn", Context.MODE_PRIVATE).edit()
-                editor.putString("SignedIn", "true")
-                editor.apply()
-                var intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("LoggedInUser", username)
-                startActivity(intent)
-                finish()
-            }
-        })
-        */
-

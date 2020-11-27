@@ -27,8 +27,7 @@ import java.text.DateFormatSymbols
 /**
  * This class handles the Dashboard / Calendar tab.
  */
-// TODO I think we can try the calendar, but if it fails just use a simple dashboard like entries in
-//  a certain time frame, total entries, etc.
+
 class Calendar : Fragment() {
     lateinit var calendarBtn: ImageButton
     lateinit var dateTimeTv: TextView

@@ -4,13 +4,10 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.SharedMemory
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.moodtracker.data.User
-import com.example.moodtracker.data.UserViewModel
 import com.example.moodtracker.fragments.Calendar
 import com.example.moodtracker.fragments.Entries
 import com.example.moodtracker.fragments.NewEntry
@@ -26,14 +23,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
  * This class also will get the currently logged in user, and pass around as needed
  */
 class MainActivity : AppCompatActivity() {
-    private lateinit var mUserViewModel: UserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        // Print the current database
-        printDatabaseUserNames()
 
         // Get the username for use in a UI if needed
         val preferences: SharedPreferences = getSharedPreferences("UserName", Context.MODE_PRIVATE)
@@ -54,17 +47,6 @@ class MainActivity : AppCompatActivity() {
             editor.apply()
         }
 
-    }
-
-    private fun printDatabaseUserNames() {
-        mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
-        //insertUserToDatabase("CazualGingerr", 4486)
-        //insertUserToDatabase("GNELSON", 2222)
-        Log.d("BEEP", "ello!")
-        // TODO this is how you print each user in the database
-        mUserViewModel.getAllUsers.observe(this, Observer {
-                list -> list.forEach{Log.d("BEEP", it.userName)}
-        })
     }
 
     /*

@@ -11,13 +11,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.moodtracker.R
-import com.example.moodtracker.data.DB
 import com.example.moodtracker.data.Entry
 import com.example.moodtracker.data.EntryViewModel
-import com.example.moodtracker.data.UserViewModel
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
