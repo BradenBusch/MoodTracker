@@ -23,13 +23,14 @@ class SpashScreen : AppCompatActivity() {
         Handler().postDelayed({
             val preferences: SharedPreferences = getSharedPreferences("SignedIn", Context.MODE_PRIVATE)
             val status: String? = preferences.getString("SignedIn", "0")
+            // If the user has already made an account, they will get directed to login
             if (status.equals("true")) {
                 startActivity(Intent(this, Login::class.java))
             }
+            // Otherwise, they will be directed to signup
             else {
                 startActivity(Intent(this, Signup::class.java))
             }
-            // startActivity(Intent(this, MainActivity::class.java))
             finish()
         }, splashTime)
     }

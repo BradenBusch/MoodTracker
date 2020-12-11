@@ -3,10 +3,12 @@ package com.example.moodtracker.fragments
 import android.content.Context
 import android.graphics.Typeface
 import android.media.Image
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
@@ -16,7 +18,6 @@ import com.example.moodtracker.data.Entry
 import java.security.KeyStore
 
 // This entire page is from: https://tutorialwing.com/android-expandablelistview-using-kotlin-example/
-//class EntryListAdapter internal constructor(private val context: Context, private val titleList: List<String>, private var dataList: HashMap<String, List<String>>): BaseExpandableListAdapter() {
 class EntryListAdapter internal constructor(private val context: Context): BaseExpandableListAdapter() {
 
     var dataList: HashMap<String, List<String>> = HashMap()
@@ -72,7 +73,8 @@ class EntryListAdapter internal constructor(private val context: Context): BaseE
             convertView = layoutInflater.inflate(R.layout.entry_list_row, null)
         }
         val listImageView: ImageView = convertView!!.findViewById(R.id.entries_img_emoji)
-        val listTitleTextView = convertView!!.findViewById<TextView>(R.id.entries_tv_header)
+        val listTitleTextView = convertView.findViewById<TextView>(R.id.entries_tv_header)
+
         listImageView.setImageResource(imageId)
         listTitleTextView.setTypeface(null, Typeface.BOLD)
         listTitleTextView.text = listTitle

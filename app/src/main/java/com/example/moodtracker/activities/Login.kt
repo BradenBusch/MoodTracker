@@ -13,18 +13,19 @@ import com.example.moodtracker.R
 
 /**
  * This class handles the login screen.
- * It verifies the credentials of Login and PIN. We can also implement a "Stay Logged In" feature
+ * Handles login of the user, as in checks the PIN they created
  *
  */
 class Login : AppCompatActivity() {
 
-    // Hooks
     private lateinit var pinEditText: EditText
     private lateinit var loginBtn: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        // Hooks
         pinEditText = findViewById(R.id.login_et_pin)
         loginBtn = findViewById(R.id.login_btn_login)
         loginBtn.setOnClickListener { verifyFields() }

@@ -41,11 +41,12 @@
         android:id="@+id/entries_tv_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         android:textColor="@color/slateBlack"
         android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/entries_img_emoji"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

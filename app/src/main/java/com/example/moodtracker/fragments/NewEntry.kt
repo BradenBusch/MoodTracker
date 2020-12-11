@@ -24,9 +24,6 @@ import java.time.format.DateTimeFormatter
  */
 class NewEntry : Fragment() {
 
-    // TODO make method handling the clicking of the buttons. this method should increase the size of
-    //  one of the buttons when clicked, and when another is clicked shrink it back.
-    //  - Make a dialog box telling the user that they can only submit once per day
     private lateinit var coolBtn: ImageButton
     private lateinit var goodBtn: ImageButton
     private lateinit var averageBtn: ImageButton
@@ -87,15 +84,9 @@ class NewEntry : Fragment() {
     }
 
     /*
-     * Helper method to print all the entries in the data base
+     * Reset each emoji to be black
+     * Called when an emoji is clicked
      */
-//    private fun printAllEntries() {
-//        mEntryViewModel = ViewModelProvider(this).get(EntryViewModel::class.java)
-//        mEntryViewModel.getAllEntries.observe(viewLifecycleOwner, Observer {
-//            list -> list.forEach{Log.d("BEEP", "EntryID: ${it.entryId} Mood: ${it.mood} Date: ${it.date} Journal: ${it.journal}")}
-//        })
-//    }
-
     private fun resetButtonClicks() {
         for (button in buttonList) {
             button.setColorFilter(resources.getColor(R.color.black))
@@ -110,32 +101,28 @@ class NewEntry : Fragment() {
             resetButtonClicks()
             coolBtn.setColorFilter(resources.getColor(R.color.great))
             clickedEmotion = 5
-            Log.d("ClickedEmotion", clickedEmotion.toString())
         }
         goodBtn.setOnClickListener {
             resetButtonClicks()
             goodBtn.setColorFilter(resources.getColor(R.color.good))
             clickedEmotion = 4
-            Log.d("ClickedEmotion", clickedEmotion.toString())
         }
         averageBtn.setOnClickListener {
             resetButtonClicks()
             averageBtn.setColorFilter(resources.getColor(R.color.average))
             clickedEmotion = 3
-            Log.d("ClickedEmotion", clickedEmotion.toString())
         }
         badBtn.setOnClickListener {
             resetButtonClicks()
             badBtn.setColorFilter(resources.getColor(R.color.bad))
             clickedEmotion = 2
-            Log.d("ClickedEmotion", clickedEmotion.toString())
         }
         terribleBtn.setOnClickListener {
             resetButtonClicks()
             terribleBtn.setColorFilter(resources.getColor(R.color.terrible))
             clickedEmotion = 1
-            Log.d("ClickedEmotion", clickedEmotion.toString())
         }
+
         /*
          * Clear the EditText
          * Make a new entry
@@ -155,7 +142,6 @@ class NewEntry : Fragment() {
             Log.d("Entry Made today right here", entryMadeToday.toString())
 
             if (entryMadeToday) {
-                Log.d("ENTERY WAS MADE", "")
                 Toast.makeText(context, "You already made an entry today, come back tomorrow to make another.", Toast.LENGTH_LONG).show()
             }
 
@@ -200,17 +186,13 @@ class NewEntry : Fragment() {
         }
         return true
     }
-
-
+    
     /*
      * Save an entry to the database.
      * mood, date, and journal are the attributes for the Entry entity.
      */
     private fun saveEntry(mood: Int, date: String, journal: String) {
-        Log.d("ClickedEmotion", clickedEmotion.toString())
-        Log.d("Date", date)
         val mDate = date.split(".")[0]
-        Log.d("Date", mDate)
         val entry = Entry(mood, journal, mDate)
         val mEntryViewModel = ViewModelProvider(this).get(EntryViewModel::class.java)
         mEntryViewModel.addEntry(entry)

@@ -10,8 +10,6 @@ import kotlinx.coroutines.launch
 /**
  * The way to actually access the database. Creating an EntryViewModel object allows calling these
  * methods below.
- *
- * Syntax for instantiation:  mEntryViewModel = ViewModelProvider(this).get(EntryViewModel::class.java) [this is context, could be different]
  */
 class EntryViewModel(application: Application): AndroidViewModel(application) {
 
@@ -25,8 +23,6 @@ class EntryViewModel(application: Application): AndroidViewModel(application) {
         getAllEntriesLD = repository.getAllEntriesLD
     }
 
-
-    // TODO add more coroutines
     fun addEntry(entry: Entry) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addEntry(entry)

@@ -11,10 +11,12 @@ import android.icu.util.Calendar
 import android.widget.DatePicker
 import androidx.fragment.app.FragmentActivity
 
+/**
+ * Builds a dialog that allows the user to select a month and year to view the number of moods they had in each month
+ */
 class MonthYearPickerDialog(): DialogFragment() {
     private val MAX_YEAR = 2099
     private lateinit var listener: DatePickerDialog.OnDateSetListener
-    private val mActivity = activity
 
     fun setListener(listener: DatePickerDialog.OnDateSetListener) {
         this.listener = listener

@@ -40,9 +40,7 @@ class Entries : Fragment() {
         mEntryViewModel = ViewModelProvider(this).get(EntryViewModel::class.java)
         expandableListView = rootView.findViewById(R.id.entries_expandableListView)
         if (expandableListView != null) {
-            Log.d("HELLO", "HE")
             val listData = getData()
-            Log.d("BEEP", listData.toString())
             adapter = EntryListAdapter(rootView.context)
             expandableListView!!.setAdapter(adapter)
             expandableListView!!.setOnGroupExpandListener { }
@@ -54,7 +52,6 @@ class Entries : Fragment() {
             }
 
         }
-        Log.d("BEEP", "I am here")
         return rootView
     }
 
@@ -68,14 +65,16 @@ class Entries : Fragment() {
         mEntryViewModel.getAllEntriesLD.observe(viewLifecycleOwner, Observer { list->
             list.forEach { entry->
                 // Journal is an array list, but it will always be one entry
+                Log.d("Date Journal", "${entry.date} ${entry.journal}\n")
                 val journal = ArrayList<String>()
                 journal.add(entry.journal)
                 data[entry.date] = journal
                 addImageToList(entry.mood)
             }
-            adapter?.setData(data, ArrayList(data.keys), imageList)
+            // TODO FIXME
+            adapter?.setData(data, ArrayList(data.keys).sorted().reversed(), imageList.reversed())
             // idk if i even need this
-            titleList = ArrayList(data.keys)
+            // titleList = ArrayList(data.keys)
         })
         Log.d("Data", data.toString())
         return data

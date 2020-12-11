@@ -25,7 +25,8 @@ import com.example.moodtracker.data.EntryViewModel
 import java.text.DateFormatSymbols
 
 /**
- * This class handles the Dashboard / Calendar tab.
+ * This class handles the Dashboard / Calendar tab
+ * Handles retrieving the values of the counts of each mood in each month and displaying it to the UI
  */
 
 class Calendar : Fragment() {
@@ -45,13 +46,11 @@ class Calendar : Fragment() {
     var overallCount: Int = 0
 
     lateinit var mEntryViewModel: EntryViewModel
-    val REQUEST_CODE = 11
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
     }
 
-    // TODO fix to always show the current month
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -76,7 +75,7 @@ class Calendar : Fragment() {
         val year = calendar.get(android.icu.util.Calendar.YEAR)
 
         // Set values for current month
-        loadValues((month + 1).toString()) // todo fix this +1 band-aid
+        loadValues((month + 1).toString())
         val realMonth = getMonth(month + 1)
         dateTimeTv.text = "${realMonth}, $year"
         overallCountTv.text = "Total Entries Made In ${realMonth}: $overallCount"
@@ -97,10 +96,17 @@ class Calendar : Fragment() {
         fun newInstance(): Calendar = Calendar()
     }
 
+    /*
+     * Convert the month to a date time format
+     */
     private fun getMonth(month: Int): String {
         return DateFormatSymbols().months[month - 1]
     }
 
+    /*
+     * Load the values of each mood that occur in the selected month
+     * month: The month to load the entries for
+     */
     private fun loadValues(month: String) {
         resetCounts()
         var entries: List<Entry> = mEntryViewModel.getAllEntries
@@ -121,6 +127,10 @@ class Calendar : Fragment() {
         overallCountTv.text = "Total Entries Made In ${getMonth(month.toInt())}: $overallCount"
     }
 
+    /*
+     * Increment the given mood count for display purposes
+     * mood: The mood to increment
+     */
     private fun addToCount(mood: Int) {
         overallCount++
         if (mood == 1) {

@@ -15,10 +15,8 @@ import com.example.moodtracker.R
  * This class handles the sign-up screen. It should write to SharedPreferences an account is created
  * to show the Login screen instead. If the user clicks Log-Out from the app, this screen will be
  * shown again.
- *
  */
 class Signup : AppCompatActivity() {
-    // Hooks
     private lateinit var usernameEditText: EditText
     private lateinit var pinEditText: EditText
     private lateinit var confPinEditText: EditText
@@ -27,6 +25,8 @@ class Signup : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
+
+        // Hooks
         usernameEditText = findViewById(R.id.signup_et_username)
         pinEditText = findViewById(R.id.signup_et_pin)
         confPinEditText = findViewById(R.id.signup_et_pinConfirm)
@@ -67,7 +67,7 @@ class Signup : AppCompatActivity() {
             confPinEditText.error = "Make sure your pins match"
             return
         }
-        // Pins match, make SharedPreferences for PIN, SignedIn, and UserName
+        // Pins match, make SharedPreferences for PIN, SignedIn, and UserName. This will store this information in SharedPreferences for login
         var editor: SharedPreferences.Editor = getSharedPreferences("Username", Context.MODE_PRIVATE).edit()
         editor.putString("UserName", username)
         editor.apply()
